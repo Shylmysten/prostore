@@ -38,6 +38,10 @@ Setup a Vercel account, then create a NEON Database
 
 Run npx prisma init to initialize a database.
 
+Requires a @neondatabase/serverless to Provide a low-level connection interface to interact with the Neon serverless PostgreSQL database using Websockets
+Requires a @prisma/adapter-neon: specifically for Prisma to ensure Prisma can operate smoothly with Neon in serverless environments like NextJS
+Requires a WebSocket Library used by the Neon adapter to establish and manage connections to the Neon serverless database.
+
 To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
