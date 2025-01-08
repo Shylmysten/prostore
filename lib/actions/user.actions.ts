@@ -5,6 +5,7 @@ import { signInFormSchema, signUpFormSchema } from "../validators";
 import { signIn, signOut } from "@/auth";
 import { hashSync } from "bcrypt-ts-edge";
 import { prisma } from "@/db/prisma";
+import { formatError } from "../utils";
 
 // Sign in the user with credentials
 export async function signInWithCredentials(prevState: unknown, formData: FormData) {
@@ -59,9 +60,13 @@ export async function signUpUser(prevState: unknown, formData: FormData) {
 
         return { success: true, message: 'User registered successfully'};
     } catch (error) {
+        //console.log(error.name);
+        //console.log(error.code);
+        //console.log(error.errors);
+        //console.log(error.meta?.target);
         if(isRedirectError(error)) {
             throw error;
         }
-        return { success: false, message: 'User was not registered' };
+        return { success: false, message: formatError(error) };
     }
 }
