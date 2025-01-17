@@ -1,11 +1,12 @@
 'use server'
 
 import { isRedirectError } from "next/dist/client/components/redirect";
-import { signInFormSchema, signUpFormSchema } from "../validators";
-import { signIn, signOut } from "@/auth";
+import { shippingAddressSchema, signInFormSchema, signUpFormSchema } from "../validators";
+import { auth, signIn, signOut } from "@/auth";
 import { hash } from "../encrypt";
 import { prisma } from "@/db/prisma";
 import { formatError } from "../utils";
+import { ShippingAddress } from "@/types";
 
 // Sign in the user with credentials
 export async function signInWithCredentials(prevState: unknown, formData: FormData) {
@@ -78,4 +79,33 @@ export async function getUserById(userId: string) {
     });
     if (!user) throw new Error('User not found');
     return user;
+}
+
+// Update the user's address
+export async function updateUserAddress(data: ShippingAddress) {
+    try {
+        const session = await auth();
+        const currentUser = await prisma.user.findFirst({
+            where: {id: session?.user?.id },
+        });
+
+        if(!currentUser) throw new Error('User not found');
+
+        const address = shippingAddressSchema.parse(data);
+
+        await prisma.user.update({
+            where: { id: currentUser.id },
+            data: { address }
+        });
+
+        return {
+            success: true,
+            messages: 'User updated successfully',
+        }
+    } catch (error) {
+        return {
+            success: false,
+            message: formatError(error)
+        }
+    }
 }
