@@ -17,7 +17,7 @@ import { updateUserPaymentMethod } from "@/lib/actions/user.actions";
 const PaymentMethodForm = ({ 
     preferredPaymentMethod,
 }: { 
-    preferredPayemntMethod: string | null;
+    preferredPaymentMethod: string | null;
 }) => {
     const router = useRouter();
     const { toast } = useToast();
@@ -42,7 +42,7 @@ const PaymentMethodForm = ({
                 });
                 return;
             }
-            
+
             router.push('/place-order');
         });
         return;
