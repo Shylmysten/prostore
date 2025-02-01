@@ -154,9 +154,9 @@ export async function getMyCart() {
         ...cart,
         items: cart.items as CartItem[],
         itemsPrice: cart.itemsPrice.toString(),
-        totalPrice: cart.itemsPrice.toString(),
-        shippingPrice: cart.itemsPrice.toString(),
-        taxPrice: cart.itemsPrice.toString(),
+        totalPrice: cart.totalPrice.toString(),
+        shippingPrice: cart.shippingPrice.toString(),
+        taxPrice: cart.taxPrice.toString(),
     })
 }
 
