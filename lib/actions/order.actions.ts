@@ -1,4 +1,4 @@
-'user server'
+'use server'
 
 import { isRedirectError } from "next/dist/client/components/redirect";
 import { convertToPlainObject, formatError } from "../utils";
