@@ -23,3 +23,5 @@ export const shippingAddressDefaultValues = {
 
 export const PAYEMENT_METHODS = process.env.PAYEMENT_METHODS ? process.env.PAYEMENT_METHODS.split(',') : ['PayPal', 'Stripe', 'CashOnDelivery'];
 export const DEFAULT_PAYEMENT_METHOD = process.env.DEFAULT_PAYEMENT_METHOD || 'PayPal';
+
+export const PAGE_SIZE = Number(process.env.PAGE_SIZE) || 2;
