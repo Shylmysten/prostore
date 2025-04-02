@@ -1,11 +1,12 @@
 import { auth } from "@/auth";
-import { getAllOrders } from "@/lib/actions/order.actions";
+import { deleteOrder, getAllOrders } from "@/lib/actions/order.actions";
 import { Metadata } from "next";
 import { formatCurrency, formatDateTime, formatId } from "@/lib/utils";
 import Link from "next/link";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Pagination from "@/components/shared/pagination";
 import { Button } from "@/components/ui/button";
+import DeleteDialog from "@/components/shared/delete-dialog";
 import { requireAdmin } from "@/lib/auth-guard";
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ const AdminOrdersPage = async (props: {
     searchParams: Promise<{page: string}>
 }) => {
      await requireAdmin();
-     
+
     const { page = '1' } = await props.searchParams;
     const session = await auth();
 
@@ -56,7 +57,7 @@ const AdminOrdersPage = async (props: {
                                         Details
                                     </Link>
                                 </Button>
-                                {/* Delete Button */}
+                                <DeleteDialog id={order.id} action={deleteOrder} />
                             </TableCell>
                         </TableRow>
                     ))}
