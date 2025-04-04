@@ -32,6 +32,7 @@ You can visit a deployed version here:
 - PayPal & Stripe
 - Tailwind CSS
 - Recharts
+- uploadThing
 - Jest Testing
 - Vercel Deployment
 
