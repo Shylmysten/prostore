@@ -13,7 +13,9 @@ const ProductList = ({ data, title, limit }: { data: Product[]; title?: string; 
                     ))}
                 </div>
             ) : (
-                <div className="text-center">No products found</div>
+                <div>
+                    <p>No products found</p>
+                </div>
             )}
         </div>
     );
