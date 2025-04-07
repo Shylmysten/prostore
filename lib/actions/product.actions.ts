@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 import { z } from 'zod';
 // Get Latest Products
 export async function getLatestProducts() {
-    //const prisma = new PrismaClient();
+  
     // Returns a prisma object, 
     const products = await prisma.product.findMany({
         orderBy: {
@@ -21,9 +21,9 @@ export async function getLatestProducts() {
     return convertToPlainObject(products);
 }
 
-// Get Product by it's slug
+// Get single Product by it's slug
 export async function getProductBySlug(slug: string) {
-    //const prisma = new PrismaClient();
+   
     const product = await prisma.product.findFirst({
         where: {
             slug: slug
@@ -31,6 +31,18 @@ export async function getProductBySlug(slug: string) {
     });
 
     return convertToPlainObject(product);
+}
+
+// Get single Product by it's ID
+export async function getProductByID(productId: string) {
+   
+    const data = await prisma.product.findFirst({
+        where: {
+            id: productId
+        }
+    });
+
+    return convertToPlainObject(data);
 }
 
 // Get all products
