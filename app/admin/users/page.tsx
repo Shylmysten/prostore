@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getAllUsers } from "@/lib/actions/user.actions";
+import { getAllUsers, deleteUser } from "@/lib/actions/user.actions";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -50,7 +50,7 @@ const AdminUserPage = async (props: {
                                         Edit
                                     </Link>
                                 </Button>
-                                {/*<DeleteDialog id={user.id} action={deleteOrder} />*/}
+                                <DeleteDialog id={user.id} action={deleteUser}/>
                             </TableCell>
                         </TableRow>
                     ))}
