@@ -1,7 +1,7 @@
 'use server'
 
 import { isRedirectError } from "next/dist/client/components/redirect";
-import { shippingAddressSchema, signInFormSchema, signUpFormSchema, paymentMethodSchema } from "../validators";
+import { shippingAddressSchema, signInFormSchema, signUpFormSchema, paymentMethodSchema, updateUserSchema } from "../validators";
 import { auth, signIn, signOut } from "@/auth";
 import { hash } from "../encrypt";
 import { prisma } from "@/db/prisma";
@@ -214,6 +214,31 @@ export async function deleteUser(id: string) {
             message: 'User deleted successfully',
         }
         
+    } catch (error) {
+        return {
+            success: false,
+            message: formatError(error)
+        }
+    }
+}
+
+// Update a user
+export async function updateUser(user: z.infer<typeof updateUserSchema>) {
+    try {
+        await prisma.user.update({
+            where: { id: user.id},
+            data: {
+                name: user.name,
+                role: user.role
+            }
+        })
+
+        revalidatePath('/admin/users');
+
+        return {
+            success: true,
+            message: 'User updated successfully',
+        }
     } catch (error) {
         return {
             success: false,
