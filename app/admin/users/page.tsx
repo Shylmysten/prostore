@@ -7,6 +7,7 @@ import DeleteDialog from "@/components/shared/delete-dialog";
 import Pagination from "@/components/shared/pagination";
 import { formatId } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { requireAdmin } from "@/lib/auth-guard";
 
 export const metadata: Metadata = {
     title: 'Admin Users'
@@ -18,6 +19,8 @@ const AdminUserPage = async (props: {
         query: string;
     }>
 }) => {
+    await requireAdmin();
+
     const { page = '1', query: searchText } = await props.searchParams;
     const users = await getAllUsers({ page: Number(page), query: searchText });
 
