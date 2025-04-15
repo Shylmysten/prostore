@@ -2,13 +2,18 @@
 import { Review } from "@/types";
 import Link from "next/link";
 import { useState } from "react";
+import ReviewForm from "./review-form";
 
 const ReviewList = ({ userId, productId, productSlug } : {
     userId: string;
     productId: string;
     productSlug: string;
 }) => {
-    const [reviews, setReviews] = useState<Review[]>([])
+    const [reviews, setReviews] = useState<Review[]>([]);
+
+    const reload = () => {
+        console.log('Review Submitted');
+    }
     
 
     return ( 
@@ -16,9 +21,7 @@ const ReviewList = ({ userId, productId, productSlug } : {
             { reviews.length === 0 && <div>No reviews yet</div>}
             { userId ? 
                 (
-                    <>
-                        {/* Review Form Here */}
-                    </>
+                        <ReviewForm userId={userId} productId={productId} onReviewSubmitted={reload} />
                 ) : (
                     <div>
                         Please 
