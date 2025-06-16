@@ -1,60 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Prostore
 
-## Getting Started
+Prostore is a modern eCommerce platform built with [Next.js](https://nextjs.org/) and [React 19](https://react.dev/). It uses serverless technologies, PostgreSQL, and a modular component architecture. The codebase is designed for scalability and maintainability.
 
-First, run the development server:
+## View a Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+See a live demo at [https://prostore-plum.vercel.app/](https://prostore-plum.vercel.app/)
+
+## Techniques Used
+
+- [Server Components and Client Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components) for optimized rendering and data fetching.
+- [React Context](https://react.dev/reference/react/createContext) for theme and state management.
+- [React Hook Form](https://react-hook-form.com/) for performant, accessible forms.
+- [Zod](https://zod.dev/) for schema validation.
+- [Dynamic Routing](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes) with file-based routes.
+- [Tailwind CSS](https://tailwindcss.com/) for utility-first styling.
+- [ShadCN UI](https://ui.shadcn.com/) for accessible, customizable UI primitives.
+- [Next Auth](https://next-auth.js.org/) for authentication.
+- [Prisma ORM](https://www.prisma.io/) for type-safe database access.
+- [PayPal](https://developer.paypal.com/docs/api/overview/) and [Stripe](https://stripe.com/docs/api) integrations for payments.
+- [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) for efficient scroll-based UI updates.
+- [Google Fonts: Inter](https://fonts.google.com/specimen/Inter) via Next.js font optimization.
+
+## Notable Libraries and Technologies
+
+- [@neondatabase/serverless](https://neon.tech/docs/serverless/) for PostgreSQL over WebSockets.
+- [@prisma/adapter-neon](https://www.prisma.io/docs/orm/prisma-client/adapter-neon) for Prisma + Neon integration.
+- [lucide-react](https://lucide.dev/) for SVG icon components.
+- [uploadthing](https://docs.uploadthing.com/) for file uploads.
+- [Recharts](https://recharts.org/en-US/) for data visualization.
+- [next-themes](https://github.com/pacocoursey/next-themes) for dark/light mode support.
+
+## Project Structure
+
+```
+app/
+assets/
+components/
+db/
+hooks/
+lib/
+prisma/
+public/
+types/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `app/`: Next.js app directory, including routing and page components.
+- `assets/`: Static assets such as images and global styles.
+- `components/`: Reusable UI and layout components.
+- `db/`: Database utilities and configuration.
+- `hooks/`: Custom React hooks.
+- `lib/`: Shared utilities, constants, and API logic.
+- `prisma/`: Prisma schema and migration files.
+- `public/`: Publicly served static files.
+- `types/`: TypeScript type definitions.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Setup and Installation
 
-You can visit a deployed version here:
-[https://prostore-plum.vercel.app/](https://prostore-plum.vercel.app/)
+1. **Clone the repository:**
+   ```sh
+   git clone <your-repo-url>
+   cd prostore
+   ```
 
-## Stack
-- Next.js 15 / React 19
-- PostgreSQL
-- Prisma ORM
-- Typescript, ESLint & Zod
-- ShadCN UI
-- Next Auth
-- React Hook Form
-- PayPal & Stripe
-- Tailwind CSS
-- Recharts
-- uploadThing
-- Jest Testing
-- Vercel Deployment
+2. **Install dependencies:**
+   ```sh
+   npm install
+   # or
+   yarn install
+   ```
 
-## Learn More
+3. **Set up your environment variables:**
+   - Copy `.env.example` to `.env` and fill in the required values for your database, authentication, and third-party services.
 
-Setup a Vercel account, then create a NEON Database
+4. **Initialize the database:**
+   - Set up a [Neon](https://neon.tech/) PostgreSQL database.
+   - Run:
+     ```sh
+     npx prisma migrate deploy
+     ```
 
-Run npx prisma init to initialize a database.
+5. **Run the development server:**
+   ```sh
+   npm run dev
+   ```
 
-Requires a @neondatabase/serverless to Provide a low-level connection interface to interact with the Neon serverless PostgreSQL database using Websockets
-Requires a @prisma/adapter-neon: specifically for Prisma to ensure Prisma can operate smoothly with Neon in serverless environments like NextJS
-Requires a WebSocket Library used by the Neon adapter to establish and manage connections to the Neon serverless database.
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+6. **Build and start for production:**
+   ```sh
+   npm run build
+   npm start
+   ```
